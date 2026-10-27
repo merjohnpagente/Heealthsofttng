@@ -312,7 +312,7 @@ function buildNav(){
   const items=map[currentUser.role]||[];
   document.getElementById('sidebar-nav').innerHTML = items.map(n=>{
     const cnt=pendingBadgeCount(n.id);
-    return `<div class="nav-item" data-id="${n.id}" onclick="loadPanel('${n.id}')"><span>${n.label}</span>${cnt?`<span class="nav-dot"></span>`:''}</div>`;
+    return `<div class="nav-item${n.id===currentPanel?' active':''}" data-id="${n.id}" onclick="loadPanel('${n.id}')"><span>${n.label}</span>${cnt?`<span class="nav-dot"></span>`:''}</div>`;
   }).join('') + `<div class="nav-item logout" onclick="openLogoutConfirm()"><span>Logout</span></div>`;
 }
 let currentPanel='';

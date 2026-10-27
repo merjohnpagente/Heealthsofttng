@@ -213,6 +213,76 @@ tbody td{padding:9px 12px;color:var(--gray-700);vertical-align:top;}
 .symptom-tally-count{font-size:20px;font-weight:700;color:var(--gray-900);}
 .symptom-tally-count small{font-size:11px;font-weight:500;color:var(--gray-500);}
 
+/* ===== MOTION / TRANSITIONS ===== */
+@keyframes panelIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes overlayIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(198,40,40,.5);}50%{box-shadow:0 0 0 6px rgba(198,40,40,0);}}
+@keyframes resultIn{from{opacity:0;transform:translateY(-4px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes warnIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Panel and card entrances */
+.section-card{animation:panelIn .28s ease backwards;}
+.stats-grid .stat-card{animation:panelIn .32s ease backwards;}
+.stats-grid .stat-card:nth-child(2){animation-delay:.04s;}
+.stats-grid .stat-card:nth-child(3){animation-delay:.08s;}
+.stats-grid .stat-card:nth-child(4){animation-delay:.12s;}
+#app.active{animation:overlayIn .3s ease backwards;}
+
+/* Hover lift */
+.stat-card{transition:transform .2s ease, box-shadow .2s ease;}
+.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.notif-item{transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;}
+.notif-item:hover{transform:translateX(3px);box-shadow:var(--shadow);}
+.symptom-tally-card{transition:transform .18s ease, box-shadow .18s ease;}
+.symptom-tally-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+
+/* Buttons */
+.btn{transition:background .18s ease, color .18s ease, transform .12s ease, box-shadow .18s ease;}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.btn:active{transform:translateY(0) scale(.97);box-shadow:none;}
+.btn:disabled:hover{transform:none;box-shadow:none;}
+.btn-icon{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;transition:background .18s, color .18s, transform .12s;}
+.btn-icon:hover{background:var(--gray-100);color:var(--green-800);transform:scale(1.08);}
+.btn-icon:active{transform:scale(.94);}
+.modal-close{transition:background .18s, color .18s, transform .2s ease;}
+.modal-close:hover{background:var(--red);color:#fff;transform:scale(1.12);}
+.tab-btn{transition:background .18s, color .18s, border-color .18s, transform .12s;}
+.tab-btn:hover{transform:translateY(-1px);border-color:var(--green-600);}
+.tab-btn.active:hover{border-color:var(--green-800);}
+
+/* Sidebar navigation */
+.nav-item{transition:background .2s, color .2s, transform .15s;}
+.nav-item:hover{transform:translateX(3px);}
+.nav-item::before{content:'';position:absolute;left:0;top:50%;width:3px;height:60%;background:#a5d6a7;border-radius:0 3px 3px 0;transform:translateY(-50%) scaleY(0);transition:transform .2s ease;}
+.nav-item.active::before{transform:translateY(-50%) scaleY(1);}
+.nav-item .nav-dot{animation:pulse 1.8s ease-in-out infinite;}
+
+/* Inputs */
+.search-input,.filter-select{transition:border-color .18s, box-shadow .18s;}
+.search-input:focus,.filter-select:focus{border-color:var(--green-600);box-shadow:0 0 0 3px rgba(67,160,71,.12);}
+.form-field input,.form-field select,.form-field textarea{transition:border-color .18s, box-shadow .18s, background .18s;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{box-shadow:0 0 0 3px rgba(67,160,71,.12);}
+.form-field input.invalid:focus,.form-field select.invalid:focus,.form-field textarea.invalid:focus{box-shadow:0 0 0 3px rgba(198,40,40,.12);}
+
+/* Tables */
+tbody tr{transition:background .15s ease;}
+
+/* Result and warning entrances */
+.result-box.show{animation:resultIn .25s ease;}
+.fever-warn{animation:warnIn .25s ease;}
+
+/* Overlays */
+.modal-overlay.open{animation:overlayIn .2s ease;}
+.print-slip.open{animation:overlayIn .2s ease;}
+.print-slip-inner{animation:panelIn .28s ease backwards;}
+
+/* Progress bars */
+.progress-bar-fill{transition:width .6s cubic-bezier(.4,0,.2,1);}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
+}
+
 @media print{
   body *{visibility:hidden;}
   .print-slip, .print-slip *{visibility:visible;}
